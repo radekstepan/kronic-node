@@ -23,5 +23,5 @@
     "scripts": {
         "test": "./node_modules/mocha/bin/mocha --compilers coffee:coffee-script --ui bdd --reporter spec"
     },
-     "main": "./kronic.js",
+    "main": "./kronic.js"
 }
