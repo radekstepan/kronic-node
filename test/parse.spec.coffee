@@ -17,8 +17,14 @@ describe 'parsing string into a date', ->
         Kronic.parse('  Today').should.equal new Date
         Kronic.parse('Yesterday').should.equal shiftDate new Date, 'Date', -1
         Kronic.parse('Tomorrow').should.equal shiftDate new Date, 'Date', 1
-        Kronic.parse('Last Monday').should.equal shiftDate new Date, 'Date', 1 - thisDay()
-        Kronic.parse('This Monday').should.equal shiftDate new Date, 'Date', 8 - thisDay()
+
+        # Is it Monday?
+        if thisDay() is 1
+            Kronic.parse('Last Wednesday').should.equal shiftDate new Date, 'Date', thisDay() - 6
+            Kronic.parse('This Wednesday').should.equal shiftDate new Date, 'Date', thisDay() + 1
+        else
+            Kronic.parse('Last Monday').should.equal shiftDate new Date, 'Date', 1 - thisDay()
+            Kronic.parse('This Monday').should.equal shiftDate new Date, 'Date', 8 - thisDay()
 
     it 'should work for day and month', ->
         if ((new Date).getTime() < new Date(thisYear(), 8, 4))
